@@ -1,0 +1,276 @@
+body {
+  font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+.container {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 540px;
+}
+h1 {
+  text-align: center;
+  color: #444;
+  font-size: 1.4em;
+  margin-bottom: 20px;
+}
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #333;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.btn-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.top-btn-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+button {
+  flex: 1;
+  min-width: 85px;
+  padding: 9px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+#calc-btn { background-color: #4CAF50; color: white; }
+#checkin-btn { background-color: #2196F3; color: white; }
+#backfill-single-btn { background-color: #FF9800; color: white; }
+#backfill-range-btn { background-color: #9C27B0; color: white; }
+#calendar-settings-btn { background-color: #607D8B; color: white; min-width: 100px; flex: none; }
+
+.result {
+  margin-top: 25px;
+  padding: 15px;
+  background-color: #f0f8f0;
+  border-left: 4px solid #4CAF50;
+  border-radius: 6px;
+  display: none;
+}
+.result.show { display: block; }
+
+.log {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #555;
+  max-height: 100px;
+  overflow-y: auto;
+  background: #fafafa;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.error {
+  color: #d32f2f;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* === 月度日历样式 === */
+.month-section {
+  margin-top: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.month-header {
+  background: #f5f5f5;
+  padding: 10px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.month-header:hover {
+  background: #eef5ff;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  padding: 8px;
+  background: #f9f9f9;
+}
+.calendar-day-label {
+  font-size: 11px;
+  text-align: center;
+  color: #777;
+  padding: 4px 0;
+}
+.calendar-day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+.day-checked {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+}
+.day-workday {
+  background-color: white;
+  border: 1px solid #a0cfff;
+  color: #333;
+}
+.day-holiday {
+  background-color: #f0f0f0;
+  color: #aaa;
+  cursor: default;
+}
+.day-custom-work {
+  background-color: #BBDEFB;
+  border: 1px solid #2196F3;
+  position: relative;
+}
+.day-custom-holiday {
+  background-color: #FFE0B2;
+  border: 1px solid #FF9800;
+  position: relative;
+}
+.day-custom-work:after, .day-custom-holiday:after {
+  content: "★";
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 8px;
+  color: #d32f2f;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 11px;
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 4px;
+}
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+}
+.green { background: #4CAF50; }
+.blue-border { background: white; border: 1px solid #a0cfff; }
+.gray { background: #f0f0f0; }
+.blue-bg { background: #BBDEFB; border: 1px solid #2196F3; }
+.orange-bg { background: #FFE0B2; border: 1px solid #FF9800; }
+
+/* 模态窗口样式 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #777;
+}
+.date-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+.date-type-options {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+.date-type-btn {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  cursor: pointer;
+  text-align: center;
+}
+.date-type-btn.selected {
+  border-color: #2196F3;
+  background: #e3f2fd;
+  font-weight: bold;
+}
+.current-settings {
+  margin-top: 20px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 10px;
+  background: #fafafa;
+  font-size: 13px;
+}
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid #eee;
+}
+.delete-setting {
+  color: #f44336;
+  cursor: pointer;
+  font-weight: bold;
+}

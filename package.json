@@ -1,0 +1,36 @@
+{
+  "name": "deposit-goal",
+  "version": "1.0.0",
+  "description": "存款目标进度追踪器 - Electron 桌面应用",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "build": "npm run build-web && electron-builder",
+    "build-web": "echo 'Web build completed' && mkdir -p dist && mkdir -p dist/css && mkdir -p dist/js",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.yourname.depositgoal",
+    "productName": "Deposit Goal Tracker",
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "build/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "build/icon.png"
+    }
+  }
+}
