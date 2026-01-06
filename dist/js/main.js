@@ -679,7 +679,7 @@ function calculate() {
     }
 
     var extraDeduction = parseFloat(extraDeductionStr) || 0;
-    var net = totalGross - totalCost - extraDeduction;
+    var net = totalGross - totalCost + extraDeduction;
 
     var resPeriod = document.getElementById("res-period");
     var resDays = document.getElementById("res-days");
