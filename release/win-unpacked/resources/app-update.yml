@@ -1,0 +1,4 @@
+owner: oahx
+repo: deposit-goal
+provider: github
+updaterCacheDirName: deposit-goal-updater
